@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+ <!--  -->
+  <package name="default" extends="struts-default">
+    <interceptors>
+      <interceptor name="exception" class="com.opensymphony.xwork2.interceptor.ExceptionMappingInterceptor"/>
+      <interceptor name="interceptora" class="mypkg.InterceptorA"/>
+      <interceptor name="interceptorb" class="mypkg.InterceptorB"/>
+      <interceptor name="interceptorc" class="mypkg.InterceptorC"/>
+
+      <interceptor-stack name="authDefaultStack">
+        <interceptor-ref name="exception"/>
+        <interceptor-ref name="interceptora"/>
+    	<interceptor-ref name="interceptorb"/>
+        <interceptor-ref name="interceptorc"/>
+        <interceptor-ref name="defaultStack"/>
+        <interceptor-ref name="fileUploadStack"/>
+      </interceptor-stack>
+    </interceptors >
+   <!-- 
+    -->
+   <!-- 
+    <global-results>
+      <result name="timeout">/sessionTimeout.jsp</result>
+      <result name="error">/error.jsp</result>
+      <result name="message">/message.jsp</result>
+      <result name="conn_error">/conn_error.jsp</result>
+      <result name="pkcs_error">/error.jsp</result>
+      <result name="hinet_gw_err">/hinet_gw_error.jsp</result>
+      <result name="empty">/empty.jsp</result>
+    </global-results>
+      -->
+    <!-- 
+    <global-exception-mappings>
+      <exception-mapping  exception="java.lang.Exception" result="error"/>
+      <exception-mapping  exception="java.net.SocketException" result="conn_error"/>
+      <exception-mapping  exception="java.net.SocketTimeoutException" result="conn_error"/>
+      <exception-mapping  exception="com.uxb2b.security.pkcs.PKCSException" result="pkcs_error"/>
+    </global-exception-mappings>
+      -->
+  </package>
+
+  <!-- SSO -->
+  <package name="sso" extends="default" >
+    <action name="sso!*" class="mypkg.SSOAction" method="{1}">
+    	<result name="view">/login.jsp</result>
+    	<interceptor-ref name="interceptorb"/>
+    	<interceptor-ref name="interceptora"/>
+    	
+    </action>
+  </package>
+
+  <!-- user login
+  <package name="member" extends="default">
+    <action name="member!*" class="com.uxb2b.backend.web.struts.login.LoginAction" method="{1}">
+      <result name="login">/member.jsp</result>
+      <result name="logout">/redirect.jsp</result>
+      <result name="success">/index.jsp</result>
+      <result name="select">/selectRole.jsp</result>
+    </action>
+  </package>
+   -->
+</struts>
