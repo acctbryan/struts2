@@ -4,9 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Insert title here  test merge2 master continue1 手動merge</title>
 </head>
-</script>
 <script type="text/javascript">
 function onLogin(){
 	document.forms[0].action="sso!login.action";
