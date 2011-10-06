@@ -1,10 +1,13 @@
 package mypkg;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.MDC;
 import org.apache.struts2.ServletActionContext;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 
 public class InterceptorA extends BaseInterceptor {
@@ -15,14 +18,16 @@ public class InterceptorA extends BaseInterceptor {
 		String org = request.getParameter("org");
 		String name = request.getParameter("name");
 		System.out.println(org);
+		Map paramters = arg0.getInvocationContext().getParameters();
+		
 		System.out.println(name);
     	MDC.put("org", org);
     	MDC.put("name", name);
 		String result = "";
 		log.info(result);
-//		result = arg0.invoke();
-//		log.info(result);
-		return arg0.invoke();
+		result = arg0.invoke();
+		log.info(result);
+		return result;
 	}
 
 }
